@@ -11,15 +11,9 @@ https://www.figma.com/file/lY1uYWeWLJp8aHqPVEvo60/Recipe-App-Wireframe?node-id=1
 ## Features
 
 ### Priorities
-3, 4, 5, 6, 1, 2, (7, 8) down the road features
+1, 2, 3, 4, 5, (6 & 7 down the road features)
 
-1. User sign up page
-  - After they sign up, take them to Survey page
-
-2. User login page
-  - After they login, take them to Survey page
-
-3. Survey Page
+ 1. Survey Page
   - Select diet section (paleo, keto, etc...)
     - Picker for each diet option on Spoonacular
   - Add ingredients section
@@ -47,12 +41,10 @@ https://www.figma.com/file/lY1uYWeWLJp8aHqPVEvo60/Recipe-App-Wireframe?node-id=1
     # redirect to recipe result page passing recipe object array via state
   }
   ```
-
-4. Recipe result page
+  2. Recipe result page
   - At the top, some sort of carousel with top 3 recipes matching the diet
   - Grid of cards with recipe image, name, ingredients, nutritional facts, and complimentary drink
-
-5. View single recipe page
+  3. View single recipe page
   - Displays recipe information on a single page so it's not cluttered in a card and easier to view. Would just display in a container
   - Page section with ability to rate the recipe
   - Page section with similar recipe suggestions (limit to 3) 
@@ -71,8 +63,11 @@ https://www.figma.com/file/lY1uYWeWLJp8aHqPVEvo60/Recipe-App-Wireframe?node-id=1
     # display success/error message
   }
   ```
+  4. User sign up page/ User login page
+  - After they login, take them to Survey page
 
-6. Saved recipes page
+  - After they sign up, take them to Survey page
+  5. Saved recipes page
   - Grid of cards with recipe image, name, ingredients, nutritional facts, and complimentary drink
   - Gets data from node server endpoint (/saved-recipes) which returns JSON of saved recipes
 
@@ -84,14 +79,12 @@ https://www.figma.com/file/lY1uYWeWLJp8aHqPVEvo60/Recipe-App-Wireframe?node-id=1
     # display saved recipes 
   }
   ```
-
-7. Get grocery stores near with selected ingredients *
+  6. Get grocery stores near with selected ingredients *
   - Based on your location, get the grocery stores near you 
   that have the ingredients
   - Could use browser api or manual input
   - Add option to filter by grocery stores that do walk-in or delivery
-
-8. Ability to comment on recipes *
+  7.   Ability to comment on recipes *
 
 ## Resources
 ### API: Spoonacular
