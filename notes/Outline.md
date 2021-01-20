@@ -1,21 +1,12 @@
 # Recipe Project
 
-## Resources
-### API: Spoonacular
-Ingredient Search:
-
-We can also search by diet by providing a `diet` query parameter
-
-https://spoonacular.com/food-api/docs#Ingredient-Search
-
-Search Recipes by Ingredients:
-
-https://spoonacular.com/food-api docs#Search-Recipes-by-Ingredients
-
-
-
 ## Purpose
 The purpose of the recipe app would be to show the user different recipes based a survey they could take. After trying the recipe the user could rate it out of 5 stars.
+
+## Detailed Sketch
+This is the detailed sketch
+
+https://www.figma.com/file/lY1uYWeWLJp8aHqPVEvo60/Recipe-App-Wireframe?node-id=1%3A98
 
 ## Features
 
@@ -101,3 +92,15 @@ The purpose of the recipe app would be to show the user different recipes based 
   - Add option to filter by grocery stores that do walk-in or delivery
 
 8. Ability to comment on recipes *
+
+## Resources
+### API: Spoonacular
+Ingredient Search:
+
+We can also search by diet by providing a `diet` query parameter
+
+https://spoonacular.com/food-api/docs#Ingredient-Search
+
+Search Recipes by Ingredients:
+
+https://spoonacular.com/food-api docs#Search-Recipes-by-Ingredients
