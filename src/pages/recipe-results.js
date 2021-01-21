@@ -2,25 +2,10 @@ import React from 'react';
 import Carousel from 'react-material-ui-carousel'
 import {Paper, Button} from '@material-ui/core'
 
-class Recipe_results extends React.Component{
+class RecipeResults extends React.Component{
     constructor (props) {
         super(props)
-        this.state = {
-            items: [
-                {
-                    name: "Rescipe results #1",
-                    description: "Five stars!"
-                },
-                {
-                    name: "Recipe results #2",
-                    description: "Four stars!"
-                },
-                {   name : "Recipe results #3",
-                    description: "Three stars"
-                }
-            ]
-        }
-    }
+            }
 
         
 	render(){ 
@@ -29,7 +14,7 @@ class Recipe_results extends React.Component{
 			<>
                 <Carousel>
                     {
-                        this.state.items.map( (item, i) => <Item key={i} item={item} /> )
+                        this.props.results.map( (item, i) => <Item key={i} item={item} /> )
                     }
                 </Carousel>
 				<Button>
@@ -44,7 +29,9 @@ function Item(props)
     return (
         <Paper>
             <h2>{props.item.name}</h2>
+            <img src= {props.item.picture} alt= {props.item.name}></img>
             <p>{props.item.description}</p>
+            
 
             <Button className="CheckButton">
                 Check it out!
@@ -52,4 +39,4 @@ function Item(props)
         </Paper>
     )
 }
-export default Recipe_results;
+export default RecipeResults;
