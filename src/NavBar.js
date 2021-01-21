@@ -12,7 +12,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/link';
+import { NavLink, Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -30,6 +30,13 @@ const useStyles = makeStyles((theme) => ({
 		color: 'white',
 		boxShadow: '0px 0px 0px 0px',
 		fontWeight: '600px',
+	},
+
+	btn: {
+		textDecoration: 'none',
+		color: 'white',
+		marginRight: '7px',
+		fontWeight: '200',
 	},
 }));
 
@@ -52,26 +59,24 @@ export default function MenuAppBar() {
 	};
 
 	return (
-		<div className={classes.root}>
+		<div>
 			<FormGroup></FormGroup>
 			<AppBar className={classes.appBar} position="sticky">
 				<Toolbar>
-					{/* <IconButton
-						edge="start"
-						className={classes.menuButton}
-						color="inherit"
-						aria-label="menu"
-					>
-						<MenuIcon />
-					</IconButton> */}
 					<Typography variant="h5" className={classes.title}>
 						Recipe App
 					</Typography>
-
-					<Button onClick={<Link to="/TestHome"></Link>} color="inherit">
-						Saved Recipes
+					<Button>
+						<Link className={classes.btn} to="/surveyPage">
+							Survey Page
+						</Link>
 					</Button>
-					<Button color="inherit">Survey page</Button>
+					<Button>
+						<Link className={classes.btn} to="/recipe-results">
+							Recipe Page
+						</Link>
+					</Button>
+
 					{auth && (
 						<div>
 							<IconButton
