@@ -29,7 +29,7 @@ function Item(props)
     return (
         <Paper>
             <h2>{props.item.name}</h2>
-            <img src= {props.item.picture} alt= {props.item.name}></img>
+            <img src= {props.item.picture} alt= {props.item.name} style={{width:'500px',height:'600px'}}></img>
             <p>{props.item.description}</p>
             
 
