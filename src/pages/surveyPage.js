@@ -17,6 +17,10 @@ const useStyles = makeStyles({
   },
   media: {
     height: 140,
+    width: 250,
+    display: "flex",
+    // justifyContent: "space-between",
+    alignContent: "space-between",
   },
   selecteditem: {
     border: "2px solid aqua",
@@ -121,7 +125,8 @@ export default function Survey() {
   }
   let listStyle = {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    // flexDirection: "row",
   };
   let style = {
     display: "flex",
@@ -133,7 +138,9 @@ export default function Survey() {
       <div style={style}>
         <Typography variant="h3">What is you favorite food?</Typography>
         <br></br>
-        <Typography variant="h5">choose six out of tweleve</Typography>
+        <div>
+          <Typography variant="h5">choose six out of tweleve</Typography>
+        </div>
       </div>
       <div style={listStyle}>
         {items.map((item) => {
@@ -164,10 +171,10 @@ export default function Survey() {
           );
         })}
       </div>
-      <div style={listStyle}>
+      <div style={style}>
         <Typography variant="h3">What is your diet?</Typography>
       </div>
-      <div style={style}>
+      <div style={listStyle}>
         {diets.map((diet) => {
           return (
             <Card
