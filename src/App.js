@@ -41,7 +41,9 @@ function App() {
         </a> 
       </header> */}
       <RecipeResults results={testResults}></RecipeResults>
+      {/* <Contanier> */}
       <Survey />
+      {/* </Contanier> */}
     </div>
   );
 }
