@@ -5,6 +5,7 @@ import {
   CardContent,
   CardMedia,
   ButtonBase,
+  Grid,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,7 +17,10 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
   media: {
-    height: 140,
+    height: 160,
+    width: 350,
+    display: "flex",
+    // justifyContent: "space-between",
   },
   selecteditem: {
     border: "2px solid aqua",
@@ -121,11 +125,13 @@ export default function Survey() {
   }
   let listStyle = {
     display: "flex",
-    justifyContent: "center",
+    AlignItems: "center",
+    // flexDirection: "row",
   };
   let style = {
     display: "flex",
-    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
   };
   const classes = useStyles();
   return (
@@ -133,68 +139,77 @@ export default function Survey() {
       <div style={style}>
         <Typography variant="h3">What is you favorite food?</Typography>
         <br></br>
+
         <Typography variant="h5">choose six out of tweleve</Typography>
       </div>
       <div style={listStyle}>
-        {items.map((item) => {
-          return (
-            <Card
-              className={`${classes.root} ${
-                item.selected ? classes.selecteditem : ""
-              }`}
-              key={item.title}
-            >
-              <CardActionArea
-                onClick={() => {
-                  selectFood(item.title);
-                }}
-              >
-                <CardMedia
-                  className={classes.media}
-                  image={item.img}
-                  title={item.title}
-                ></CardMedia>
-                <CardContent>
-                  <Typography gutterbuttom variant="h5" component="h3">
-                    {item.title}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          );
-        })}
-      </div>
-      <div style={listStyle}>
-        <Typography variant="h3">What is your diet?</Typography>
+        <Grid container spacing={3}>
+          {items.map((item) => {
+            return (
+              <Grid item xs={4}>
+                <Card
+                  className={`${classes.root} ${
+                    item.selected ? classes.selecteditem : ""
+                  }`}
+                  key={item.title}
+                >
+                  <CardActionArea
+                    onClick={() => {
+                      selectFood(item.title);
+                    }}
+                  >
+                    <CardMedia
+                      className={classes.media}
+                      image={item.img}
+                      title={item.title}
+                    ></CardMedia>
+                    <CardContent>
+                      <Typography gutterbuttom variant="h5" component="h3">
+                        {item.title}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
       </div>
       <div style={style}>
-        {diets.map((diet) => {
-          return (
-            <Card
-              className={`${classes.root} ${
-                diet.selected ? classes.selecteddiet : ""
-              }`}
-              key={diet.title}
-            >
-              <CardActionArea
-                onClick={() => {
-                  selectDiet(diet.title);
-                }}
-              >
-                <CardMedia
-                  className={classes.media}
-                  image={diet.img}
-                  title={diet.title}
-                ></CardMedia>
-                <CardContent>
-                  <Typography gutterbuttom variant="h5" component="h3">
-                    {diet.title}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          );
-        })}
+        <Typography variant="h3">What is your diet?</Typography>
+      </div>
+      <div style={listStyle}>
+        <Grid container spacing={3}>
+          {diets.map((diet) => {
+            return (
+              <Grid item xs={4}>
+                <Card
+                  className={`${classes.root} ${
+                    diet.selected ? classes.selecteddiet : ""
+                  }`}
+                  key={diet.title}
+                >
+                  <CardActionArea
+                    onClick={() => {
+                      selectDiet(diet.title);
+                    }}
+                  >
+                    <CardMedia
+                      className={classes.media}
+                      image={diet.img}
+                      title={diet.title}
+                    ></CardMedia>
+                    <CardContent>
+                      <Typography gutterbuttom variant="h5" component="h3">
+                        {diet.title}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
       </div>
     </div>
   );
