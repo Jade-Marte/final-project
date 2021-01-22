@@ -23,6 +23,10 @@ class SavedRecipes extends Component {
       recipes: [{ img: "/food-pics/25471.jpg", title: "Meal" }],
     };
   }
+  // create a function to call the result the name should be componentDidMount
+  // in the function Axios call the nodes/ API
+  // .then
+  //   this.setState(recipes: {Api}results)
   render() {
     const { classes } = this.props;
     return (
