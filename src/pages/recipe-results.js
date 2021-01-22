@@ -6,31 +6,29 @@ class RecipeResults extends React.Component {
   constructor(props) {
     super(props);
   }
-// This is just a test
+  // This is just a test
   render() {
     return (
       <>
         <Grid container>
           <Grid item xs={4.1}>
-            <Carousel>
+            <img
+              src="https://tse2.mm.bing.net/th?id=OIP.xaF966Gpx9WWO1X81pirRwHaE8&pid=Api&P=0&w=231&h=155"
+              style={{ width: "500px", height: "400px",paddingTop: "72px" }}
+            ></img>
+          </Grid>
+          <Grid item xs={4.1}>
+            <Carousel index="1">
               {this.props.results.map((item, i) => (
                 <Item key={i} item={item} />
               ))}
             </Carousel>
           </Grid>
           <Grid item xs={4.1}>
-            <Carousel>
-              {this.props.results.map((item, i) => (
-                <Item key={i} item={item} />
-              ))}
-            </Carousel>
-          </Grid>
-          <Grid item xs={4.1}>
-            <Carousel>
-              {this.props.results.map((item, i) => (
-                <Item key={i} item={item} />
-              ))}
-            </Carousel>
+            <img
+              src="https://tse1.mm.bing.net/th?id=OIP.KDFklMdaYEXT32cep3qqjgHaFR&pid=Api&P=0&w=216&h=155"
+              style={{ width: "500px", height: "400px",paddingTop: "72px" }}
+            ></img>
           </Grid>
         </Grid>
       </>
