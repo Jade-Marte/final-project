@@ -76,6 +76,9 @@ export default function MenuAppBar() {
 							Recipe Page
 						</Link>
 					</Button>
+					<Button>
+						<Link className={classes.btn} to="login">Login</Link>
+					</Button>
 
 					{auth && (
 						<div>
