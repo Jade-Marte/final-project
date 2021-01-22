@@ -45,7 +45,7 @@ class ViewRecipes extends React.Component {
 		const mainRecipe = {
 			// margin: 'auto',
 			maxWidth: '500',
-			height: '300px',
+			height: '310px',
 			marginBottom: '30px',
 			marginTop: '30px',
 		};
