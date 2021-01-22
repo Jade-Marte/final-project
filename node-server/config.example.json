@@ -1,0 +1,5 @@
+{
+  "session": {
+    "secret": "RANDOM_SECRET_HERE"
+  }
+}
