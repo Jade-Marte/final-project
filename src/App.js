@@ -19,19 +19,19 @@ function App() {
       name: "Result 1",
       description: "One",
       picture:
-        "https://valentinascorner.com/wp-content/uploads/2020/07/Shrimp-Ceviche-Recipe-3.jpg",
+        "https://cdn.cancercenter.com/-/media/ctca/images/others/blogs/2019/06-june/02-blog-healthy-food-l.jpg",
     },
     {
       name: "Result 2",
       description: "Two",
       picture:
-        "https://therecipecritic.com/wp-content/uploads/2015/10/porcupinemeatballs-650x975.jpg",
+        "https://weneedfun.com/wp-content/uploads/2015/10/Delicious-Food-Photos-7.jpg",
     },
     {
       name: "Result 3",
       description: "Three",
       picture:
-        "https://sweetandsavorymeals.com/wp-content/uploads/2019/05/Grilled-Eggplant-Recipe-4.jpg",
+        "https://blog.hdwallsource.com/wp-content/uploads/2015/01/italian-food-wallpaper-hd-44478-45604-hd-wallpapers.jpg",
     },
   ];
   return (
