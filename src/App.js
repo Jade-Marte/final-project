@@ -15,19 +15,19 @@ function App() {
 	//these are test items. Delete when the program is working.
 	let testResults = [
 		{
-			name: 'Result 1',
+			name: 'Recipe 1',
 			description: 'One',
 			picture:
 				'https://valentinascorner.com/wp-content/uploads/2020/07/Shrimp-Ceviche-Recipe-3.jpg',
 		},
 		{
-			name: 'Result 2',
+			name: 'Recipe  2',
 			description: 'Two',
 			picture:
 				'https://therecipecritic.com/wp-content/uploads/2015/10/porcupinemeatballs-650x975.jpg',
 		},
 		{
-			name: 'Result 3',
+			name: 'Recipe 3',
 			description: 'Three',
 			picture:
 				'https://sweetandsavorymeals.com/wp-content/uploads/2019/05/Grilled-Eggplant-Recipe-4.jpg',
