@@ -67,7 +67,7 @@ export default function MenuAppBar() {
 						Recipe App
 					</Typography>
 					<Button>
-						<Link className={classes.btn} to="/surveyPage">
+						<Link className={classes.btn} to="/survey">
 							Survey Page
 						</Link>
 					</Button>
