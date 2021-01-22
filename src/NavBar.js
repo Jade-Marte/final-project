@@ -54,6 +54,15 @@ const useStyles = makeStyles((theme) => ({
 			display: 'block',
 		},
 	},
+
+	mobileMenu: {
+		'@media (min-width:960px)': {
+			display: 'none',
+		},
+		// [theme.breakpoints.down('md')]: {
+		// 	display: 'block',
+		// },
+	},
 }));
 
 export default function MenuAppBar() {
@@ -91,14 +100,14 @@ export default function MenuAppBar() {
 			<AppBar className={classes.appBar} position="sticky">
 				<Toolbar>
 					<Typography variant="h6" className={classes.title}>
-						<Link className={classes.btn} to="/surveyPage">
-							Survey Page
+						<Link className={classes.btn} to="/survey">
+							Recipe App
 						</Link>
 					</Typography>
 
 					<div className={`${classes.desktopMenu}`}>
 						<Button>
-							<Link className={classes.btn} to="/surveyPage">
+							<Link className={classes.btn} to="/survey">
 								Survey Page
 							</Link>
 						</Button>
@@ -112,6 +121,7 @@ export default function MenuAppBar() {
 					{auth && (
 						<div>
 							<IconButton
+								className={classes.mobileMenu}
 								aria-label="account of current user"
 								aria-controls="menu-appbar"
 								aria-haspopup="true"
@@ -135,10 +145,9 @@ export default function MenuAppBar() {
 								open={openMenu}
 								onClose={handleCloseMenu}
 							>
-								{' '}
 								<div className={classes.mobileMenu}>
 									<MenuItem onClick={handleCloseMenu}>
-										<Link className={classes.btnMenu} to="/surveyPage">
+										<Link className={classes.btnMenu} to="/survey">
 											Survey Page
 										</Link>
 									</MenuItem>
