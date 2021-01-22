@@ -70,12 +70,82 @@ export default function MenuAppBar() {
 						<Link className={classes.btn} to="/survey">
 							Survey Page
 						</Link>
+<<<<<<< Updated upstream
 					</Button>
 					<Button>
 						<Link className={classes.btn} to="/recipe-results">
 							Recipe Page
 						</Link>
 					</Button>
+=======
+					</Typography>
+
+					<div className={`${classes.desktopMenu}`}>
+						<Button>
+							<Link className={classes.btn} to="/survey">
+								Survey Page
+							</Link>
+						</Button>
+						<Button>
+							<Link className={classes.btn} to="/recipe-results">
+								Recipe Page
+							</Link>
+						</Button>
+						<Button>
+							<Link className={classes.btn} to="/viewRecipes">
+								View Recipes
+							</Link>
+						</Button>
+					</div>
+
+					{auth && (
+						<div>
+							<IconButton
+								className={classes.mobileMenu}
+								aria-label="account of current user"
+								aria-controls="menu-appbar"
+								aria-haspopup="true"
+								onClick={handleMenu1}
+								color="inherit"
+							>
+								<MenuIcon />
+							</IconButton>
+							<Menu
+								id="menu-appbar"
+								anchorEl={anchorE2}
+								anchorOrigin={{
+									vertical: 'top',
+									horizontal: 'left',
+								}}
+								keepMounted
+								transformOrigin={{
+									vertical: 'top',
+									horizontal: 'left',
+								}}
+								open={openMenu}
+								onClose={handleCloseMenu}
+							>
+								<div className={classes.mobileMenu}>
+									<MenuItem onClick={handleCloseMenu}>
+										<Link className={classes.btnMenu} to="/survey">
+											Survey Page
+										</Link>
+									</MenuItem>
+									<MenuItem onClick={handleCloseMenu}>
+										<Link className={classes.btnMenu} to="/recipe-results">
+											Recipe Page
+										</Link>
+									</MenuItem>
+									<MenuItem onClick={handleCloseMenu}>
+										<Link className={classes.btnMenu} to="/ViewRecipes">
+											View Recipes
+										</Link>
+									</MenuItem>
+								</div>
+							</Menu>
+						</div>
+					)}
+>>>>>>> Stashed changes
 
 					{auth && (
 						<div>

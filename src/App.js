@@ -1,15 +1,11 @@
 import React from 'react';
 import NavBar from './NavBar.js';
-import { Container } from '@material-ui/core'
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-} from 'react-router-dom';
+import { Container } from '@material-ui/core';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import SurveyPage from './pages/surveyPage.js';
 import RecipeResultsPage from './pages/recipe-results.js';
-
+import ViewRecipes from './pages/ViewRecipes';
 
 function App() {
 	//these are test items. Delete when the program is working.
@@ -41,6 +37,10 @@ function App() {
 				<Switch>
 					<Route path="/survey">
 						<SurveyPage />
+					</Route>
+
+					<Route path="/ViewRecipes">
+						<ViewRecipes />
 					</Route>
 
 					<Route path="/recipe-results">
