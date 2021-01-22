@@ -4,6 +4,7 @@ import RecipeResults from './pages/recipe-results.js';
 import NavBar from './NavBar.js';
 import React from 'react';
 import Survey from './pages/surveyPage.js';
+import { Container } from '@material-ui/core'
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -36,7 +37,7 @@ function App() {
 	return (
 		<Router>
 			<NavBar></NavBar>
-			<div className="App">
+			<Container maxWidth="lg" className="App">
 				<Switch>
 					<Route path="/surveyPage">
 						<Survey />
@@ -44,7 +45,7 @@ function App() {
 
 					<RecipeResults results={testResults}></RecipeResults>
 				</Switch>
-			</div>
+			</Container>
 		</Router>
 	);
 }
