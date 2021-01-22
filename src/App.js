@@ -9,7 +9,7 @@ import {
 
 import SurveyPage from './pages/surveyPage.js';
 import RecipeResultsPage from './pages/recipe-results.js';
-
+import LoginPage from './pages/LoginPage'
 
 function App() {
 	//these are test items. Delete when the program is working.
@@ -45,6 +45,10 @@ function App() {
 
 					<Route path="/recipe-results">
 						<RecipeResultsPage results={testResults} />
+					</Route>
+					
+					<Route path="/login">
+						<LoginPage/>
 					</Route>
 				</Switch>
 			</Container>
