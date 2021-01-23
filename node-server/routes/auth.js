@@ -7,22 +7,28 @@ const { formatValidationErrors } = require('../lib/error')
 const router = express.Router()
 const loginSchema = yup.object().shape({
   username: yup.string().required(),
-  password: yup.string().required()
+  password: yup.string().required(),
 })
 const registrationSchema = yup.object().shape({
   username: yup.string().required().min(3).max(20),
   password: yup.string().required().min(8).max(100),
-  password_confirmation: yup.string().required().when('$password', (password, schema) => {
-    return !!password ? schema.equals(password) : schema
-  }),
+  password_confirmation: yup
+    .string()
+    .required()
+    .test({
+      name: 'equals',
+      message: 'passwords do not match',
+      test: function (value) {
+        return value === this.parent.password
+      },
+    }),
   first_name: yup.string().required(),
   last_name: yup.string().required(),
-  email: yup.string().required().email()
+  email: yup.string().required().email(),
 })
 
 router.post('/login', async (req, res) => {
   try {
-    console.log('hello')
     await loginSchema.validate(req.body, { abortEarly: false })
 
     const data = loginSchema.cast(req.body)
