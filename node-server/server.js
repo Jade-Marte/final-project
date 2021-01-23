@@ -4,7 +4,6 @@ const session = require('express-session')
 const config = require('./config.json')
 
 const app = express()
-const port = 4000
 
 const authRoutes = require('./routes/auth')
 
@@ -22,6 +21,6 @@ app.get('/', (req, res) => {
   res.send('Hello World')
 })
 
-app.listen(port, () => {
-  console.log(`Recipe app listening at http://localhost:${port}`)
+app.listen(config.express.port, () => {
+  console.log(`Recipe app listening at http://localhost:${config.express.port}`)
 })
