@@ -1,7 +1,7 @@
 const knex = require('./index')
 
 knex.schema
-  .createTable('users', table => {
+  .createTable('users', (table) => {
     table.increments('id')
     table.string('username').notNullable().unique()
     table.string('password').notNullable()
