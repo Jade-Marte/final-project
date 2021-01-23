@@ -70,10 +70,11 @@ router.post('/register', async (req, res) => {
     // Hash the user's password so it's no longer in plaintext
     data.password = await bcrypt.hash(data.password, 10)
 
-    const [user] = await knex('users').insert(data)
+    const userId = await knex('users').insert(data)
+    const user = await knex('users').where('id', userId).first()
     // Delete the user's password from the object so when we send the created user back
     // we don't share their password
-    delete user.password
+    if (user) delete user.password
 
     res.status(200).send({ message: 'User created', user })
   } catch (error) {
