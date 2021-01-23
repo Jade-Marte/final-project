@@ -78,20 +78,17 @@ router.post('/register', async (req, res) => {
 
     res.status(200).send({ message: 'User created', user })
   } catch (error) {
+    console.log(error)
+
     if (error.name === 'ValidationError') {
-      console.log(error)
       const errorRes = formatValidationErrors(error)
       return res.status(400).send(errorRes)
     }
 
     res.status(500).send({
-      message: 'An error occurred'
+      message: 'An error occurred',
     })
   }
-})
-
-router.get('/test', (req, res) => {
-  res.send('test')
 })
 
 module.exports = router
