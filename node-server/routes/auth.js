@@ -65,7 +65,7 @@ router.post('/login', async (req, res) => {
 router.post('/register', async (req, res) => {
   try {
     await registrationSchema.validate(req.body, { abortEarly: false })
-    const data = registrationSchema.cast(req.body)
+    const { password_confirmation, ...data } = registrationSchema.cast(req.body)
 
     // Hash the user's password so it's no longer in plaintext
     data.password = await bcrypt.hash(data.password, 10)
