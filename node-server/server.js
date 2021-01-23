@@ -2,11 +2,24 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const session = require('express-session')
 const config = require('./config.json')
+const cors = require('cors')
 
 const app = express()
 
 const authRoutes = require('./routes/auth')
 
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (config.cors.whitelist.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+    credentials: true,
+  })
+)
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(session({
