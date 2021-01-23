@@ -22,16 +22,18 @@ app.use(
 )
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use(session({
-  secret: config.session.secret,
-  resave: false,
-  saveUninitialized: true
-}))
+app.use(
+  session({
+    secret: config.session.secret,
+    resave: true,
+    saveUninitialized: true,
+  })
+)
 
 app.use(authRoutes)
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.send('Recipe app API')
 })
 
 app.listen(config.express.port, () => {
