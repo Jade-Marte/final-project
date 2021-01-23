@@ -39,7 +39,19 @@ router.post('/login', async (req, res) => {
 
     if (!user) {
       return res.status(404).send({
-        message: 'User not found'
+        message: 'Incorrect username or password',
+      })
+    }
+
+    const matches = await bcrypt.compare(data.password, user.password)
+    if (matches) {
+      req.session.userId = user.id
+      res.status(200).send({
+        message: 'Logged in',
+      })
+    } else {
+      res.status(403).send({
+        message: 'Incorrect username or password',
       })
     }
   } catch (error) {
