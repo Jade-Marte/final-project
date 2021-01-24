@@ -70,14 +70,7 @@ export default function MenuAppBar() {
 						<Link className={classes.btn} to="/survey">
 							Survey Page
 						</Link>
-<<<<<<< Updated upstream
-					</Button>
-					<Button>
-						<Link className={classes.btn} to="/recipe-results">
-							Recipe Page
-						</Link>
-					</Button>
-=======
+						</Button>
 					</Typography>
 
 					<div className={`${classes.desktopMenu}`}>
@@ -145,7 +138,6 @@ export default function MenuAppBar() {
 							</Menu>
 						</div>
 					)}
->>>>>>> Stashed changes
 
 					{auth && (
 						<div>
@@ -177,6 +169,7 @@ export default function MenuAppBar() {
 							</Menu>
 						</div>
 					)}
+				</Toolbar>
 				</Toolbar>
 			</AppBar>
 		</div>
