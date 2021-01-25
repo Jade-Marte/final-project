@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 // class userList extends component {}
 //
 const useStyles = makeStyles((theme) => ({
@@ -220,14 +221,16 @@ export default function Survey() {
             );
           })}
           <div style={buttonStyle}>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="large"
-              className={classes.margin}
-            >
-              Begin food journey
-            </Button>
+            <Link to="/recipe-results">
+              <Button
+                variant="outlined"
+                color="primary"
+                size="large"
+                className={classes.margin}
+              >
+                Begin food journey
+              </Button>
+            </Link>
           </div>
         </Grid>
       </div>
