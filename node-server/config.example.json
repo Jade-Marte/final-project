@@ -1,0 +1,13 @@
+{
+  "express": {
+    "port": 4000
+  },
+  "session": {
+    "secret": "RANDOM_SECRET_HERE"
+  },
+  "cors": {
+    "whitelist": [
+      "http://localhost:3000"
+    ]
+  }
+}

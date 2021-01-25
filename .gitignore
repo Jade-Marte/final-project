@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 .vscode/
 .eslintcache
+
+node-server/config.json
+database.db
