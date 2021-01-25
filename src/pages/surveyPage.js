@@ -4,15 +4,14 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
-  ButtonBase,
+  Button,
   Grid,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
 // class userList extends component {}
 //
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
   },
@@ -28,7 +27,10 @@ const useStyles = makeStyles({
   selecteddiet: {
     border: "2px solid aqua",
   },
-});
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function Survey() {
   const [items, setItems] = useState([
@@ -105,6 +107,9 @@ export default function Survey() {
     setItems(
       items.map((item) => {
         if (item.title === title) {
+          let check = selectedItems;
+          check.push(title);
+          setSelectedItmes(check);
           return { ...item, selected: !item.selected };
         } else {
           return item;
@@ -112,10 +117,14 @@ export default function Survey() {
       })
     );
   }
+
   function selectDiet(title) {
     setDiet(
       diets.map((diet) => {
         if (diet.title === title) {
+          let check = selectedItems;
+          check.push(title);
+          setSelectedItmes(check);
           return { ...diet, selected: !diet.selected };
         } else {
           return diet;
@@ -133,6 +142,7 @@ export default function Survey() {
     alignItems: "center",
     flexDirection: "column",
   };
+  let buttonStyle = {};
   const classes = useStyles();
   return (
     <div>
@@ -209,6 +219,16 @@ export default function Survey() {
               </Grid>
             );
           })}
+          <div style={buttonStyle}>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              className={classes.margin}
+            >
+              Begin food journey
+            </Button>
+          </div>
         </Grid>
       </div>
     </div>
