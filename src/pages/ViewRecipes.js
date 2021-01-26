@@ -72,6 +72,7 @@ export default class ViewRecipes extends React.Component {
 			background: 'lightRed',
 			marginBottom: '20px',
 			boxShadow: '5px 10px 8px #888888',
+			border: '1px solid green',
 		};
 
 		const imageStyes = {
@@ -128,7 +129,7 @@ export default class ViewRecipes extends React.Component {
 								style={{
 									color: 'black',
 									fontFamily: 'Kalam, cursive',
-									fontWeight: '500px',
+									fontWeight: '450',
 								}}
 								variant="h3"
 								component="h2"
@@ -159,6 +160,8 @@ export default class ViewRecipes extends React.Component {
 											marginBottom: '20px',
 											background:
 												'linear-gradient(90deg, rgba(42,204,33,0.9220063025210083) 0%, rgba(46,204,65,1) 35%, rgba(35,157,86,1) 100%)',
+											fontFamily: 'Kalam, cursive',
+											fontWeight: '800',
 										}}
 										variant="contained"
 										color="secondary"
