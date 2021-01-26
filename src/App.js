@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import SurveyPage from './pages/surveyPage.js';
 import RecipeResultsPage from './pages/recipe-results.js';
-import ViewRecipes from './pages/ViewRecipes';
+import ViewRecipes from './pages/ViewRecipes.js';
 
 function App() {
 	//these are test items. Delete when the program is working.
@@ -39,7 +39,7 @@ function App() {
 						<SurveyPage />
 					</Route>
 
-					<Route path="/ViewRecipes">
+					<Route path="/viewRecipes">
 						<ViewRecipes />
 					</Route>
 
