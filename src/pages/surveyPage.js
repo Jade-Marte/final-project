@@ -10,6 +10,7 @@ import {
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import axios from "axios";
 // class userList extends component {}
 //
 const useStyles = makeStyles((theme) => ({
@@ -94,8 +95,9 @@ export default function Survey() {
     },
     {
       img: "/food-pics/642x361_13_Dairy_Free_Dinner_Recipes-porkbunchan.jpg",
-      title: "Non-Dairy",
+      title: "Paleo",
       selected: false,
+      // intolerance: true,
     },
     {
       img: "/food-pics/Chicken-Sweet-Potato-Meal-Prep-Bowls-Recipe.jpg",
@@ -103,29 +105,65 @@ export default function Survey() {
       selected: false,
     },
   ]);
+  function apiCall() {
+    axios
+      .get("https://api.spoonacular.com/recipes/findByIngredients", {
+        params: {
+          ingredients: items
+            .filter((item) => item.selected)
+            .map((item) => item.title)
+            .join(),
+          apiKey: "4379302160b042a3ab60233f4880dd0f",
+          diet: diets
+            .filter((item) => item.selected && !item.intolerance)
+            .map((item) => item.title)
+            .join(),
+          intolerances: diets
+            .filter((item) => item.selected && item.intolerance)
+            .map((item) => item.title)
+            .join(),
+        },
+      })
+      .then((call) => {
+        const food = call.data;
+        console.log(food);
+      });
+  }
   const [selectedItems, setSelectedItmes] = useState([]);
   function selectFood(title) {
     setItems(
       items.map((item) => {
         if (item.title === title) {
-          let check = selectedItems;
-          check.push(title);
-          setSelectedItmes(check);
+          // let check = selectedItems;
+          // check.push(title);
+          // setSelectedItmes(check);
+          // console.log(selectedItems);
           return { ...item, selected: !item.selected };
         } else {
           return item;
         }
       })
     );
+    // setTimeout(() => {
+    //   console.log(
+    //     items
+    //       .filter((item) => item.selected)
+    //       .map((item) => item.title)
+    //       .join()
+    //   );
+    // }, 1000);
   }
 
   function selectDiet(title) {
     setDiet(
       diets.map((diet) => {
+        if (diet.selected) {
+          return { ...diet, selected: false };
+        }
         if (diet.title === title) {
-          let check = selectedItems;
-          check.push(title);
-          setSelectedItmes(check);
+          // let check = selectedItems;
+          // check.push(title);
+          // setSelectedItmes(check);
           return { ...diet, selected: !diet.selected };
         } else {
           return diet;
@@ -221,16 +259,15 @@ export default function Survey() {
             );
           })}
           <div style={buttonStyle}>
-            <Link to="/recipe-results">
-              <Button
-                variant="outlined"
-                color="primary"
-                size="large"
-                className={classes.margin}
-              >
-                Begin food journey
-              </Button>
-            </Link>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              className={classes.margin}
+              onClick={apiCall}
+            >
+              Begin food journey
+            </Button>
           </div>
         </Grid>
       </div>
