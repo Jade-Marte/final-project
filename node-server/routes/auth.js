@@ -46,8 +46,11 @@ router.post('/login', async (req, res) => {
     const matches = await bcrypt.compare(data.password, user.password)
     if (matches) {
       req.session.userId = user.id
+
+      delete user.password
       res.status(200).send({
         message: 'Logged in',
+        user,
       })
     } else {
       res.status(403).send({
