@@ -6,13 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-// import Switch from '@material-ui/core/Switch';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -59,26 +57,17 @@ const useStyles = makeStyles((theme) => ({
 		'@media (min-width:960px)': {
 			display: 'none',
 		},
-		// [theme.breakpoints.down('md')]: {
-		// 	display: 'block',
-		// },
 	},
 }));
 
 export default function MenuAppBar() {
 	const classes = useStyles();
-	const [auth, setAuth] = React.useState(true);
+	const [auth] = React.useState(true);
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
 
-	const [menu, setMenu] = React.useState(true);
 	const [anchorE2, setAnchorE2] = React.useState(null);
 	const openMenu = Boolean(anchorE2);
-
-	const handleChange = (event) => {
-		setAuth(event.target.checked);
-		setMenu(event.target.checked);
-	};
 
 	const handleMenu = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -154,6 +143,16 @@ export default function MenuAppBar() {
 									<MenuItem onClick={handleCloseMenu}>
 										<Link className={classes.btnMenu} to="/recipe-results">
 											Recipe Page
+										</Link>
+									</MenuItem>
+									<MenuItem onClick={handleCloseMenu}>
+										<Link className={classes.btnMenu} to="/recipeStorage">
+											Favorites
+										</Link>
+									</MenuItem>
+									<MenuItem onClick={handleCloseMenu}>
+										<Link className={classes.btnMenu} to="/recipeStorage">
+											Favorites
 										</Link>
 									</MenuItem>
 								</div>
