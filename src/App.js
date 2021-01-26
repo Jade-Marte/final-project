@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 
-import NavBar from './NavBar.js'
+import NavBar from './components/NavBar.js'
 import SurveyPage from './pages/surveyPage.js'
 import RecipeResultsPage from './pages/recipe-results.js'
 import LoginPage from './pages/LoginPage'
