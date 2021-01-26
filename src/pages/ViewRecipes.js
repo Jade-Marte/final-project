@@ -134,7 +134,7 @@ export default class ViewRecipes extends React.Component {
 								variant="h3"
 								component="h2"
 							>
-								Similar Recipe
+								Similar Recipes
 							</Typography>
 						</Grid>
 
