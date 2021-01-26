@@ -7,10 +7,12 @@ import {
   Button,
   Grid,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Recipes from "../components/RecipesContext";
+
 // class userList extends component {}
 //
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Survey() {
+  const { recipes, setRecipes } = useContext(Recipes);
   const [items, setItems] = useState([
     { img: "/food-pics/bananas-thumb-l.png", title: "Banana", selected: false },
     { img: "/food-pics/soy_info.jpg", title: "Soy", selected: false },
@@ -127,6 +130,7 @@ export default function Survey() {
       .then((call) => {
         const food = call.data;
         console.log(food);
+        setRecipes(food);
       });
   }
   const [selectedItems, setSelectedItmes] = useState([]);
