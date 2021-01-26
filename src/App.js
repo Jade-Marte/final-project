@@ -1,14 +1,18 @@
+import { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 import { ProvideAuth, PrivateRoute } from './components/Auth'
+import RecipesContext from './components/RecipesContext'
 
-import NavBar from './NavBar.js'
+import NavBar from './components/NavBar.js'
 import SurveyPage from './pages/surveyPage.js'
 import RecipeResultsPage from './pages/recipe-results.js'
 import LoginPage from './pages/LoginPage'
 import ViewRecipes from './pages/ViewRecipes'
 
 function App() {
+  const [recipes, setRecipes] = useState([])
+  const recipesContextValue = { recipes, setRecipes }
   //these are test items. Delete when the program is working.
   let testResults = [
     {
@@ -33,28 +37,30 @@ function App() {
 
   return (
     <ProvideAuth>
-      <Router>
-        <NavBar />
-        <Container maxWidth='lg' className='App'>
-          <Switch>
-            <Route path='/survey'>
-              <SurveyPage />
-            </Route>
+      <RecipesContext.Provider value={recipesContextValue}>
+        <Router>
+          <NavBar />
+          <Container maxWidth='lg' className='App'>
+            <Switch>
+              <Route path='/survey'>
+                <SurveyPage />
+              </Route>
 
-            <Route path='/recipe-results'>
-              <RecipeResultsPage results={testResults} />
-            </Route>
+              <Route path='/recipe-results'>
+                <RecipeResultsPage results={testResults} />
+              </Route>
 
-            <Route path='/view-recipes'>
-              <ViewRecipes />
-            </Route>
+              <Route path='/view-recipes'>
+                <ViewRecipes />
+              </Route>
 
-            <Route path='/login'>
-              <LoginPage />
-            </Route>
-          </Switch>
-        </Container>
-      </Router>
+              <Route path='/login'>
+                <LoginPage />
+              </Route>
+            </Switch>
+          </Container>
+        </Router>
+      </RecipesContext.Provider>
     </ProvideAuth>
   )
 }
