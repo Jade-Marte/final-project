@@ -25,8 +25,11 @@ class SavedRecipes extends Component {
   }
   // create a function to call the result the name should be componentDidMount
   // in the function Axios call the nodes/ API
-  // .then
-  //   this.setState(recipes: {Api}results)
+  // axios.get("http://localhost:4000/saved-recipes")
+  // .then(res => {
+  //    const foods = res.data
+  //})
+  //   this.setState({recipes})
   render() {
     const { classes } = this.props;
     return (
