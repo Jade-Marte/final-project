@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	appBar: {
-		background: '#2ECC71',
+		// background: '#2ECC71',
+		background:
+			'linear-gradient(90deg, rgba(42,204,33,0.9220063025210083) 0%, rgba(46,204,65,1) 35%, rgba(35,157,86,1) 100%)',
 		color: 'white',
 		boxShadow: '0px 0px 0px 0px',
 		fontWeight: '600px',
@@ -173,6 +175,12 @@ export default function MenuAppBar() {
 							</Menu>
 						</div>
 					)}
+					{/* </Button> */}
+					<Button>
+						<Link className={classes.btn} to="login">
+							Login
+						</Link>
+					</Button>
 
 					{auth && (
 						<div>
