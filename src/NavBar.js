@@ -105,6 +105,16 @@ export default function MenuAppBar() {
 								Recipe Page
 							</Link>
 						</Button>
+						<Button>
+							<Link className={classes.btn} to="/recipeStorage">
+								Favorites
+							</Link>
+						</Button>
+						<Button>
+							<Link className={classes.btn} to="/ViewRecipes">
+								ViewRecipes
+							</Link>
+						</Button>
 					</div>
 
 					{auth && (
@@ -151,8 +161,8 @@ export default function MenuAppBar() {
 										</Link>
 									</MenuItem>
 									<MenuItem onClick={handleCloseMenu}>
-										<Link className={classes.btnMenu} to="/recipeStorage">
-											Favorites
+										<Link className={classes.btnMenu} to="/ViewRecipes">
+											View Recipes
 										</Link>
 									</MenuItem>
 								</div>
