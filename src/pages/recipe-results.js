@@ -6,7 +6,6 @@ class RecipeResults extends React.Component {
   constructor(props) {
     super(props);
   }
-  // This is just a test
   render() {
     return (
       <>

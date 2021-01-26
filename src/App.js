@@ -2,10 +2,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 import { ProvideAuth, PrivateRoute } from './components/Auth'
 
-import NavBar from './components/NavBar.js'
+import NavBar from './NavBar.js'
 import SurveyPage from './pages/surveyPage.js'
 import RecipeResultsPage from './pages/recipe-results.js'
 import LoginPage from './pages/LoginPage'
+import ViewRecipes from './pages/ViewRecipes'
 
 function App() {
   //these are test items. Delete when the program is working.
@@ -42,6 +43,10 @@ function App() {
 
             <Route path='/recipe-results'>
               <RecipeResultsPage results={testResults} />
+            </Route>
+
+            <Route path='/view-recipes'>
+              <ViewRecipes />
             </Route>
 
             <Route path='/login'>
