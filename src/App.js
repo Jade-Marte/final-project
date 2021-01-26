@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
+import { ProvideAuth, PrivateRoute } from './components/Auth'
 
 import NavBar from './components/NavBar.js'
 import SurveyPage from './pages/surveyPage.js'
@@ -30,24 +31,26 @@ function App() {
   ]
 
   return (
-    <Router>
-      <NavBar />
-      <Container maxWidth='lg' className='App'>
-        <Switch>
-          <Route path='/survey'>
-            <SurveyPage />
-          </Route>
+    <ProvideAuth>
+      <Router>
+        <NavBar />
+        <Container maxWidth='lg' className='App'>
+          <Switch>
+            <Route path='/survey'>
+              <SurveyPage />
+            </Route>
 
-          <Route path='/recipe-results'>
-            <RecipeResultsPage results={testResults} />
-          </Route>
+            <Route path='/recipe-results'>
+              <RecipeResultsPage results={testResults} />
+            </Route>
 
-          <Route path='/login'>
-            <LoginPage />
-          </Route>
-        </Switch>
-      </Container>
-    </Router>
+            <Route path='/login'>
+              <LoginPage />
+            </Route>
+          </Switch>
+        </Container>
+      </Router>
+    </ProvideAuth>
   )
 }
 
