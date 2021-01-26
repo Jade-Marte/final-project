@@ -10,12 +10,13 @@ import {
 } from '@material-ui/core'
 import MuiAlert from '@material-ui/lab/Alert'
 import { validateUsername, validatePassword } from '../validators/login'
+import { authContext as AuthContext } from '../components/Auth'
 
-const styles = (theme) => ({
+const styles = {
   loginContainer: {
     height: '100%',
   },
-})
+}
 
 class LoginPage extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class LoginPage extends Component {
     this.setState({ snackbar: { open: false } })
   }
 
-  submitForm = async (event) => {
+  submitForm = async (event, ctx) => {
     event.preventDefault()
 
     const usernameError = validateUsername(this.state.username.value)
@@ -76,19 +77,23 @@ class LoginPage extends Component {
 
     if (usernameError || passwordError) return
 
+    const [res, body] = await ctx.signin(
+      this.state.username.value,
+      this.state.password.value
+    )
     // TODO: implement login logic
-    const res = await fetch('http://localhost:4000/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        username: this.state.username.value,
-        password: this.state.password.value,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    })
-    const body = await res.json()
+    // const res = await fetch('http://localhost:4000/login', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     username: this.state.username.value,
+    //     password: this.state.password.value,
+    //   }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   credentials: 'include',
+    // })
+    // const body = await res.json()
 
     // If there were validation errors, parse, then display them
     if (!res.ok && res.status === 400) {
@@ -114,6 +119,8 @@ class LoginPage extends Component {
       return
     }
 
+    console.log(res, body)
+
     alert('This is where you logged in correcly! Hooray!')
   }
 
@@ -121,77 +128,85 @@ class LoginPage extends Component {
     const { classes } = this.props
 
     return (
-      <Box my={5} className={classes.loginContainer}>
-        <Grid
-          container
-          spacing={2}
-          align='center'
-          justify='center'
-          direction='column'
-        >
-          <Snackbar
-            open={this.state.snackbar.open}
-            onClose={this.handleSnackbarClose}
-            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          >
-            <Alert onClose={this.handleSnackbarClose} severity='error'>
-              {this.state.snackbar.message}
-            </Alert>
-          </Snackbar>
+      <AuthContext.Consumer>
+        {(ctx) => (
+          <Box my={5} className={classes.loginContainer}>
+            <Grid
+              container
+              spacing={2}
+              align='center'
+              justify='center'
+              direction='column'
+            >
+              <Snackbar
+                open={this.state.snackbar.open}
+                onClose={this.handleSnackbarClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+              >
+                <Alert onClose={this.handleSnackbarClose} severity='error'>
+                  {this.state.snackbar.message}
+                </Alert>
+              </Snackbar>
 
-          <form onSubmit={this.submitForm}>
-            <Grid item md={3} my={5}>
-              <Box mb={2}>
-                <Typography variant='h3' component='h3'>
-                  Login
-                </Typography>
-              </Box>
-              <Box mb={2}>
-                <TextField
-                  variant='outlined'
-                  label='Username'
-                  id='username'
-                  name='username'
-                  required
-                  fullWidth
-                  value={this.state.username.value}
-                  onChange={this.handleInputChange}
-                  error={!!this.state.username.error}
-                  helperText={this.state.username.error}
-                />
-              </Box>
+              <form
+                onSubmit={(event) => {
+                  this.submitForm(event, ctx)
+                }}
+              >
+                <Grid item md={3} my={5}>
+                  <Box mb={2}>
+                    <Typography variant='h3' component='h3'>
+                      Login
+                    </Typography>
+                  </Box>
+                  <Box mb={2}>
+                    <TextField
+                      variant='outlined'
+                      label='Username'
+                      id='username'
+                      name='username'
+                      required
+                      fullWidth
+                      value={this.state.username.value}
+                      onChange={this.handleInputChange}
+                      error={!!this.state.username.error}
+                      helperText={this.state.username.error}
+                    />
+                  </Box>
 
-              <Box mb={2}>
-                <TextField
-                  variant='outlined'
-                  label='Password'
-                  id='password'
-                  name='password'
-                  type='password'
-                  required
-                  fullWidth
-                  value={this.state.password.value}
-                  onChange={this.handleInputChange}
-                  error={!!this.state.password.error}
-                  helperText={this.state.password.error}
-                />
-              </Box>
+                  <Box mb={2}>
+                    <TextField
+                      variant='outlined'
+                      label='Password'
+                      id='password'
+                      name='password'
+                      type='password'
+                      required
+                      fullWidth
+                      value={this.state.password.value}
+                      onChange={this.handleInputChange}
+                      error={!!this.state.password.error}
+                      helperText={this.state.password.error}
+                    />
+                  </Box>
 
-              <Box>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  fullWidth
-                  type='submit'
-                  role='submit'
-                >
-                  Login
-                </Button>
-              </Box>
+                  <Box>
+                    <Button
+                      variant='contained'
+                      color='primary'
+                      fullWidth
+                      type='submit'
+                      role='submit'
+                    >
+                      Login
+                    </Button>
+                  </Box>
+                </Grid>
+              </form>
             </Grid>
-          </form>
-        </Grid>
-      </Box>
+          </Box>
+        )}
+      </AuthContext.Consumer>
     )
   }
 }
