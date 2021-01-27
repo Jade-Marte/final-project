@@ -3,6 +3,7 @@ import Carousel from "react-material-ui-carousel";
 import { Paper, Button, Grid } from "@material-ui/core";
 import RecipeContext from "../components/RecipesContext";
 import axios from "axios";
+import {Link} from "react-router-dom"
 
 class RecipeResults extends React.Component {
   constructor(props) {
@@ -60,15 +61,15 @@ function Item(props) {
   };
   return (
     <Paper style={styles}>
-      <h2>{props.item.name}</h2>
+      <h2>{props.item.title}</h2>
       <img
         src={props.item.image}
-        alt={props.item.name}
+        alt={props.item.title}
         style={{ height: "400px", width: "Auto" }}
       ></img>
-      <p>{props.item.description}</p>
+      <p>{props.item.summary}</p>
 
-      <Button className="CheckButton">Check it out!</Button>
+      <Button className="CheckButton"> <Link to={`/view-recipe/${props.item.id}`}>Check it out!</Link></Button>
     </Paper>
   );
 }
