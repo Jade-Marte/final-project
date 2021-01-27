@@ -5,11 +5,42 @@ const auth = {
   isAuthenticated: false,
   user: {},
   async signin(username, password) {
-    return fetch('http://localhost:4000/login', {
+    console.log(process.env)
+    return fetch(`${process.env.REACT_APP_NODE_URL}/login`, {
       method: 'POST',
       body: JSON.stringify({
         username,
         password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+      .then((res) => Promise.all([Promise.resolve(res), res.json()]))
+      .then(([res, body]) => {
+        if (res.ok) {
+          auth.isAuthenticated = true
+          auth.user = body.user
+        }
+        return [res, body]
+      })
+  },
+  async register({
+    first_name,
+    last_name,
+    username,
+    password,
+    password_confirmation,
+  }) {
+    return fetch(`${process.env.REACT_APP_NODE_URL}/register`, {
+      method: 'POST',
+      body: JSON.stringify({
+        first_name,
+        last_name,
+        username,
+        password,
+        password_confirmation,
       }),
       headers: {
         'Content-Type': 'application/json',
