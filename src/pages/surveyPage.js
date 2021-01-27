@@ -4,15 +4,18 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
-  ButtonBase,
+  Button,
   Grid,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Recipes from "../components/RecipesContext";
 
 // class userList extends component {}
 //
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
   },
@@ -28,9 +31,13 @@ const useStyles = makeStyles({
   selecteddiet: {
     border: "2px solid aqua",
   },
-});
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function Survey() {
+  const { recipes, setRecipes } = useContext(Recipes);
   const [items, setItems] = useState([
     { img: "/food-pics/bananas-thumb-l.png", title: "Banana", selected: false },
     { img: "/food-pics/soy_info.jpg", title: "Soy", selected: false },
@@ -91,8 +98,9 @@ export default function Survey() {
     },
     {
       img: "/food-pics/642x361_13_Dairy_Free_Dinner_Recipes-porkbunchan.jpg",
-      title: "Non-Dairy",
+      title: "Paleo",
       selected: false,
+      // intolerance: true,
     },
     {
       img: "/food-pics/Chicken-Sweet-Potato-Meal-Prep-Bowls-Recipe.jpg",
@@ -100,22 +108,84 @@ export default function Survey() {
       selected: false,
     },
   ]);
+  function apiCall() {
+    axios
+      .get("https://api.spoonacular.com/recipes/findByIngredients", {
+        params: {
+          ingredients: items
+            .filter((item) => item.selected)
+            .map((item) => item.title)
+            .join(),
+          apiKey: process.env.REACT_APP_API_KEY,
+          diet: diets
+            .filter((item) => item.selected && !item.intolerance)
+            .map((item) => item.title)
+            .join(),
+          intolerances: diets
+            .filter((item) => item.selected && item.intolerance)
+            .map((item) => item.title)
+            .join(),
+        },
+      })
+      .then((call) => {
+        const food = call.data;
+        // console.log(food);
+        // setRecipes(food);
+        return axios.get(
+          "https://api.spoonacular.com/recipes/informationBulk",
+          {
+            params: {
+              ids: food
+                .map((item) => {
+                  return item.id;
+                })
+                .join(),
+              apiKey: process.env.REACT_APP_API_KEY,
+            },
+          }
+        );
+      })
+      .then((res) => {
+        setRecipes(res.data);
+        console.log(res.data);
+      });
+  }
+
   const [selectedItems, setSelectedItmes] = useState([]);
   function selectFood(title) {
     setItems(
       items.map((item) => {
         if (item.title === title) {
+          // let check = selectedItems;
+          // check.push(title);
+          // setSelectedItmes(check);
+          // console.log(selectedItems);
           return { ...item, selected: !item.selected };
         } else {
           return item;
         }
       })
     );
+    // setTimeout(() => {
+    //   console.log(
+    //     items
+    //       .filter((item) => item.selected)
+    //       .map((item) => item.title)
+    //       .join()
+    //   );
+    // }, 1000);
   }
+
   function selectDiet(title) {
     setDiet(
       diets.map((diet) => {
+        if (diet.selected) {
+          return { ...diet, selected: false };
+        }
         if (diet.title === title) {
+          // let check = selectedItems;
+          // check.push(title);
+          // setSelectedItmes(check);
           return { ...diet, selected: !diet.selected };
         } else {
           return diet;
@@ -133,7 +203,15 @@ export default function Survey() {
     alignItems: "center",
     flexDirection: "column",
   };
+  let buttonStyle = {};
   const classes = useStyles();
+  let disabled = false;
+  if (
+    diets.filter((diet) => diet.selected).length === 0 ||
+    items.filter((item) => item.selected).length === 0
+  ) {
+    disabled = true;
+  }
   return (
     <div>
       <div style={style}>
@@ -209,6 +287,18 @@ export default function Survey() {
               </Grid>
             );
           })}
+          <div style={buttonStyle}>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              className={classes.margin}
+              onClick={apiCall}
+              disabled={disabled}
+            >
+              Begin food journey
+            </Button>
+          </div>
         </Grid>
       </div>
     </div>
