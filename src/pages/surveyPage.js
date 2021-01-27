@@ -116,7 +116,7 @@ export default function Survey() {
             .filter((item) => item.selected)
             .map((item) => item.title)
             .join(),
-          apiKey: "4379302160b042a3ab60233f4880dd0f",
+          apiKey: process.env.REACT_APP_API_KEY,
           diet: diets
             .filter((item) => item.selected && !item.intolerance)
             .map((item) => item.title)
@@ -129,10 +129,28 @@ export default function Survey() {
       })
       .then((call) => {
         const food = call.data;
-        console.log(food);
-        setRecipes(food);
+        // console.log(food);
+        // setRecipes(food);
+        return axios.get(
+          "https://api.spoonacular.com/recipes/informationBulk",
+          {
+            params: {
+              ids: food
+                .map((item) => {
+                  return item.id;
+                })
+                .join(),
+              apiKey: process.env.REACT_APP_API_KEY,
+            },
+          }
+        );
+      })
+      .then((res) => {
+        setRecipes(res.data);
+        console.log(res.data);
       });
   }
+
   const [selectedItems, setSelectedItmes] = useState([]);
   function selectFood(title) {
     setItems(
