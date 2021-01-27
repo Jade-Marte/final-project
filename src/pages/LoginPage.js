@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import {
-	Grid,
-	TextField,
-	Button,
-	Box,
-	Typography,
-	Snackbar,
-	withStyles,
-} from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
-import { validateUsername, validatePassword } from '../validators/login';
-import { authContext as AuthContext } from '../components/Auth';
+  Grid,
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Snackbar,
+  withStyles,
+} from '@material-ui/core'
+import MuiAlert from '@material-ui/lab/Alert'
+import { validateUsername, validatePassword } from '../validators/login'
+import { authContext as AuthContext } from '../components/Auth'
+import { Redirect } from 'react-router-dom'
 
 const styles = {
 	loginContainer: {
@@ -22,21 +23,22 @@ class LoginPage extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			username: {
-				value: '',
-				error: '',
-			},
-			password: {
-				value: '',
-				error: '',
-			},
-			snackbar: {
-				open: false,
-				error: '',
-			},
-		};
-	}
+    this.state = {
+      username: {
+        value: '',
+        error: '',
+      },
+      password: {
+        value: '',
+        error: '',
+      },
+      snackbar: {
+        open: false,
+        error: '',
+      },
+      redirect: false,
+    }
+  }
 
 	handleInputChange = (event) => {
 		this.setState({
@@ -119,34 +121,36 @@ class LoginPage extends Component {
 			return;
 		}
 
-		console.log(res, body);
-
-		alert('This is where you logged in correcly! Hooray!');
-	};
+    this.setState({ redirect: true })
+  }
 
 	render() {
 		const { classes } = this.props;
 
-		return (
-			<AuthContext.Consumer>
-				{(ctx) => (
-					<Box my={5} className={classes.loginContainer}>
-						<Grid
-							container
-							spacing={2}
-							align="center"
-							justify="center"
-							direction="column"
-						>
-							<Snackbar
-								open={this.state.snackbar.open}
-								onClose={this.handleSnackbarClose}
-								anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-							>
-								<Alert onClose={this.handleSnackbarClose} severity="error">
-									{this.state.snackbar.message}
-								</Alert>
-							</Snackbar>
+    if (this.state.redirect) {
+      return <Redirect to='/survey' />
+    }
+
+    return (
+      <AuthContext.Consumer>
+        {(ctx) => (
+          <Box my={5} className={classes.loginContainer}>
+            <Grid
+              container
+              spacing={2}
+              align='center'
+              justify='center'
+              direction='column'
+            >
+              <Snackbar
+                open={this.state.snackbar.open}
+                onClose={this.handleSnackbarClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+              >
+                <Alert onClose={this.handleSnackbarClose} severity='error'>
+                  {this.state.snackbar.message}
+                </Alert>
+              </Snackbar>
 
 							<form
 								onSubmit={(event) => {
