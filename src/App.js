@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
-import { ProvideAuth, PrivateRoute } from './components/Auth'
+import { ProvideAuth, PrivateRoute } from './components/AuthContext'
 import RecipesContext from './components/RecipesContext'
 
 import NavBar from './components/NavBar.js'

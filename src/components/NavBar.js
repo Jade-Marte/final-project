@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import Button from '@material-ui/core/Button'
 import { NavLink, Link } from 'react-router-dom'
-import { authContext as AuthContext } from './Auth'
+import { authContext as AuthContext } from './AuthContext'
 
 const useStyles = makeStyles((theme) => ({
   root: {
