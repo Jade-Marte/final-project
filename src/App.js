@@ -49,7 +49,7 @@ function App() {
 							</Container>
 						</Route>
 
-						<Route path="/LandingPage">
+						<Route exact path="/">
 							{/* <Container maxWidth={false}> */}
 							<LandingPage />
 							{/* </Container> */}
