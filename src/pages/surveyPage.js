@@ -187,6 +187,13 @@ export default function Survey() {
   };
   let buttonStyle = {};
   const classes = useStyles();
+  let disabled = false;
+  if (
+    diets.filter((diet) => diet.selected).length === 0 ||
+    items.filter((item) => item.selected).length === 0
+  ) {
+    disabled = true;
+  }
   return (
     <div>
       <div style={style}>
@@ -269,6 +276,7 @@ export default function Survey() {
               size="large"
               className={classes.margin}
               onClick={apiCall}
+              disabled={disabled}
             >
               Begin food journey
             </Button>
