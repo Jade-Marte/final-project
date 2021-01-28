@@ -3,6 +3,7 @@ const yup = require('yup')
 const knex = require('../database')
 const bcrypt = require('bcrypt')
 const { formatValidationErrors } = require('../lib/error')
+const authMiddleware = require('../middleware/auth')
 
 const router = express.Router()
 const loginSchema = yup.object().shape({
@@ -96,6 +97,19 @@ router.post('/register', async (req, res) => {
       message: 'An error occurred',
     })
   }
+})
+
+router.get('/profile', authMiddleware, async (req, res) => {
+  console.log(req.session.userId)
+  const user = await knex('users')
+    .select('id')
+    .select('username')
+    .select('first_name')
+    .select('last_name')
+    .where(knex.raw('id = ?', [req.session.userId]))
+    .first()
+
+  res.send({ user })
 })
 
 module.exports = router

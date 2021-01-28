@@ -107,7 +107,7 @@ export default function MenuAppBar() {
               <Toolbar>
                 <Typography variant='h6' className={classes.title}>
                   <Link className={classes.btn} to='/survey'>
-                    Recipe App
+                    Zesty Friendgredients
                   </Link>
                 </Typography>
 
@@ -124,13 +124,13 @@ export default function MenuAppBar() {
                     </Link>
                   </Button>
 
-                  {!ctx.user && (
+                  {ctx.user && (
                     <>
-                      <Button>
+                      {/* <Button>
                         <Link className={classes.btn} to='/recipe-results'>
                           Recipe Results
                         </Link>
-                      </Button>
+                      </Button> */}
 
                       <Button>
                         <Link className={classes.btn} to='/saved-recipes'>
@@ -187,11 +187,18 @@ export default function MenuAppBar() {
                   </div>
                 )}
                 {!ctx.user && (
-                  <Button>
-                    <Link className={classes.btn} to='login'>
-                      Login
-                    </Link>
-                  </Button>
+                  <>
+                    <Button>
+                      <Link className={classes.btn} to='/login'>
+                        Login
+                      </Link>
+                    </Button>
+                    <Button>
+                      <Link className={classes.btn} to='/register'>
+                        Register
+                      </Link>
+                    </Button>
+                  </>
                 )}
 
                 {!!ctx.user && (
@@ -220,7 +227,6 @@ export default function MenuAppBar() {
                       open={open}
                       onClose={handleClose}
                     >
-                      <MenuItem onClick={handleClose}>Sign Up</MenuItem>
                       <MenuItem onClick={handleClose}>Log Out</MenuItem>
                     </Menu>
                   </div>

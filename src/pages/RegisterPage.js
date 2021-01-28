@@ -120,7 +120,8 @@ class RegisterPage extends Component {
     }
 
     const confirmPasswordError = validatePasswordConfirmation(
-      this.state.passwordConfirmation.value
+      this.state.password_confirmation.value,
+      this.state.password.value
     )
     if (confirmPasswordError) {
       this.setState({
@@ -140,7 +141,13 @@ class RegisterPage extends Component {
     )
       return
 
-    const [res, body] = await ctx.signup({ ...this.state })
+    const [res, body] = await ctx.register({
+      first_name: this.state.first_name.value,
+      last_name: this.state.last_name.value,
+      username: this.state.username.value,
+      password: this.state.password.value,
+      password_confirmation: this.state.password_confirmation.value,
+    })
 
     // If there were validation errors, parse, then display them
     if (!res.ok && res.status === 400) {
@@ -292,8 +299,12 @@ class RegisterPage extends Component {
                       fullWidth
                       type='submit'
                       role='submit'
+                      style={{
+                        backgroundColor: 'rgba(35,157,86,1)',
+                        fontWeight: '600',
+                      }}
                     >
-                      Login
+                      Register
                     </Button>
                   </Box>
                 </Grid>
