@@ -39,7 +39,7 @@ function validateLastName(value) {
 
   return null
 }
-module.exports = {
+export {
   validateUsername,
   validatePassword,
   validatePasswordConfirmation,
