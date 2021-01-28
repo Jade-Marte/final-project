@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Recipes from "../components/RecipesContext";
 
