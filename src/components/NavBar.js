@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     boxShadow: '0px 0px 0px 0px',
     fontWeight: '600px',
+    marginBottom: 25,
   },
 
   btn: {
@@ -102,7 +103,6 @@ export default function MenuAppBar() {
       {(ctx) => (
         <>
           <div>
-            <FormGroup></FormGroup>
             <AppBar className={classes.appBar} position='sticky'>
               <Toolbar>
                 <Typography variant='h6' className={classes.title}>
@@ -124,23 +124,21 @@ export default function MenuAppBar() {
                     </Link>
                   </Button>
 
-                  <Button>
-                    <Link className={classes.btn} to='/recipe-results'>
-                      Recipe Page
-                    </Link>
-                  </Button>
+                  {!ctx.user && (
+                    <>
+                      <Button>
+                        <Link className={classes.btn} to='/recipe-results'>
+                          Recipe Results
+                        </Link>
+                      </Button>
 
-                  <Button>
-                    <Link className={classes.btn} to='/saved-recipes'>
-                      Saved Recipes
-                    </Link>
-                  </Button>
-
-                  <Button>
-                    <Link className={classes.btn} to='/viewRecipes'>
-                      Recipe View
-                    </Link>
-                  </Button>
+                      <Button>
+                        <Link className={classes.btn} to='/saved-recipes'>
+                          Saved Recipes
+                        </Link>
+                      </Button>
+                    </>
+                  )}
                 </div>
 
                 {!!ctx.user && (
