@@ -124,13 +124,13 @@ export default function MenuAppBar() {
                     </Link>
                   </Button>
 
-                  {!ctx.user && (
+                  {ctx.user && (
                     <>
-                      <Button>
+                      {/* <Button>
                         <Link className={classes.btn} to='/recipe-results'>
                           Recipe Results
                         </Link>
-                      </Button>
+                      </Button> */}
 
                       <Button>
                         <Link className={classes.btn} to='/saved-recipes'>
@@ -187,11 +187,18 @@ export default function MenuAppBar() {
                   </div>
                 )}
                 {!ctx.user && (
-                  <Button>
-                    <Link className={classes.btn} to='login'>
-                      Login
-                    </Link>
-                  </Button>
+                  <>
+                    <Button>
+                      <Link className={classes.btn} to='/login'>
+                        Login
+                      </Link>
+                    </Button>
+                    <Button>
+                      <Link className={classes.btn} to='/register'>
+                        Register
+                      </Link>
+                    </Button>
+                  </>
                 )}
 
                 {!!ctx.user && (
