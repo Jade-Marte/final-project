@@ -1,180 +1,221 @@
-import React from 'react'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-
-import Card from '@material-ui/core/Card'
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
 import {
-  Button,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-} from '@material-ui/core'
+	Button,
+	CardActionArea,
+	CardContent,
+	CardMedia,
+} from '@material-ui/core';
+import RecipesContext from '../components/RecipesContext';
+import { withStyles } from '@material-ui/core';
+import { withRouter, Link } from 'react-router-dom';
+import axios from 'axios';
+const styles = {
+	card: {
+		'&:hover': {
+			opacity: 1,
+			transform: 'scale(1)',
+		},
+		transform: 'scale(.8)',
+	},
+};
 
-export default class ViewRecipes extends React.Component {
-  state = {
-    recipe: {
-      name: 'Recipe Name',
-      image:
-        'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636',
-      recipe: ' ',
-      nutritionalFacts:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.  ',
-    },
-    otherOptions: [
-      {
-        similarRecipe: {
-          name: '',
-          image:
-            'https://c.ndtvimg.com/2020-01/dd46j918_chilli-chicken_625x300_21_January_20.jpg',
-          recipe: '',
-          nutritional_facts:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,',
-        },
-      },
-      {
-        similarRecipe: {
-          name: '',
-          image:
-            'https://hips.hearstapps.com/ghk.h-cdn.co/assets/16/38/1474395998-ghk-0216-comfortfoodcover-meatballs.jpg?crop=0.856xw:0.571xh;0.0224xw,0.296xh&resize=640:*',
+class ViewRecipes extends React.Component {
+	state = {
+		recipe: {},
+		otherOptions: [],
+		redirect: '',
+	};
 
-          recipe: '',
-          nutritional_facts:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,',
-        },
-      },
-      {
-        similarRecipe: {
-          name: ' ',
-          image:
-            'https://images2.minutemediacdn.com/image/upload/c_crop,h_1126,w_2000,x_0,y_181/f_auto,q_auto,w_1100/v1554932288/shape/mentalfloss/12531-istock-637790866.jpg',
-          recipe: '',
-          nutritional_facts:
-            'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, ',
-        },
-      },
-    ],
-  }
+	static contextType = RecipesContext;
+	componentDidMount() {
+		const { recipes } = this.context;
+		const { id } = this.props.match.params;
 
-  render() {
-    const mainRecipe = {
-      margin: 'auto',
-      maxWidth: '500',
-      height: '310px',
-      marginBottom: '30px',
-      marginTop: '30px',
-      display: 'flex',
-    }
+		axios
+			.get(`https://api.spoonacular.com/recipes/${id}/information`, {
+				params: {
+					apiKey: process.env.REACT_APP_API_KEY,
+				},
+			})
+			.then((res) => {
+				const recipe = res.data;
+				this.setState({ recipe: recipe });
+				console.log(recipe);
+			});
 
-    const cardStyles = {
-      width: '300px',
-      marginRight: '30px',
-      background: 'lightRed',
-      marginBottom: '20px',
-      boxShadow: '5px 10px 8px #888888',
-      border: '1px solid green',
-    }
+		return axios
+			.get(`https://api.spoonacular.com/recipes/${id}/similar`, {
+				params: {
+					apiKey: process.env.REACT_APP_API_KEY,
+				},
+			})
+			.then((res) => {
+				const similarRecipe = res.data;
+				this.setState({ otherOptions: similarRecipe });
+				console.log(similarRecipe);
+			});
+	}
 
-    const imageStyes = {
-      height: '100%',
-      width: '100%',
-    }
+	render() {
+		const { classes } = this.props;
+		const mainRecipe = {
+			margin: 'auto',
+			width: '200',
+			height: '300px',
+			marginBottom: '30px',
+			marginTop: '30px',
+			display: 'flex',
+		};
 
-    return (
-      <div>
-        <Grid container justify='center' align='center'>
-          <Grid item xs={12}>
-            <CardContent>
-              <Typography
-                style={{ fontFamily: 'Kalam, cursive' }}
-                variant='h3'
-                component='h3'
-              >
-                {this.state.recipe.name}
-              </Typography>
-            </CardContent>
-          </Grid>
-          <Grid item md={8} justify='center'>
-            <Card style={mainRecipe}>
-              <Grid style={{ width: 'maxwidth' }} item md={6} xs={10} lg={6}>
-                <img
-                  src={this.state.recipe.image}
-                  alt={this.state.recipe.name}
-                  style={imageStyes}
-                ></img>
-              </Grid>
+		const cardStyles = {
+			width: '300px',
+			marginRight: '30px',
+			background: 'lightRed',
+			marginBottom: '20px',
+			boxShadow: '5px 10px 8px #888888',
+			border: '1px solid green',
+		};
 
-              <Grid item xs={6}>
-                <Box
-                  style={{
-                    padding: '10px',
-                    background:
-                      'linear-gradient(90deg, rgba(42,204,33,0.4542191876750701) 0%, rgba(46,204,65,0.47102591036414565) 35%, rgba(35,157,86,0.36738445378151263) 100%)',
-                    color: 'black',
-                    height: '100%',
-                    width: '100%',
-                    textAlign: 'center',
-                  }}
-                >
-                  {' '}
-                  {this.state.recipe.nutritionalFacts}{' '}
-                </Box>
-              </Grid>
-            </Card>
-          </Grid>
+		const imageStyes = {
+			height: '100%',
+			width: '100%',
+		};
 
-          <Grid container spacing='3' justify='center' align='center'>
-            <Grid item xs={12}>
-              <Typography
-                style={{
-                  color: 'black',
-                  fontFamily: 'Kalam, cursive',
-                  fontWeight: '450',
-                }}
-                variant='h3'
-                component='h2'
-              >
-                Similar Recipes
-              </Typography>
-            </Grid>
+		return (
+			<RecipesContext.Consumer>
+				{({ recipes, setRecipes }) => (
+					<div key={this.state.recipe.id}>
+						<Grid container justify="center" align="center">
+							<Grid item xs={12} md={6} lg={4}>
+								<CardContent>
+									<Typography
+										style={{ fontFamily: 'Kalam, cursive' }}
+										variant="h3"
+										component="h3"
+									>
+										{this.state.recipe.title}
+									</Typography>
+								</CardContent>
+							</Grid>
+							<Grid item xs={12}>
+								<Card style={mainRecipe}>
+									<Grid
+										style={{ width: 'maxwidth' }}
+										item
+										md={6}
+										xs={12}
+										lg={6}
+									>
+										<img
+											src={this.state.recipe.image}
+											alt={this.state.recipe.title}
+											style={imageStyes}
+										></img>
+									</Grid>
+									<Grid item xs={12}>
+										<Box
+											style={{
+												padding: '20px 10px 0px 10px',
+												marginBottom: '10px',
+												background:
+													'linear-gradient(90deg, rgba(42,204,33,0.4542191876750701) 0%, rgba(46,204,65,0.47102591036414565) 35%, rgba(35,157,86,0.36738445378151263) 100%)',
+												color: 'black',
+												height: '100%',
+												width: '100%',
+												textAlign: 'center',
+											}}
+										>
+											{/* {this.state.recipe.summary}
+											 */}
 
-            {this.state.otherOptions.map((options) => {
-              return (
-                <Card style={cardStyles} elevation={3}>
-                  <CardActionArea>
-                    <CardMedia
-                      image={options.similarRecipe.image}
-                      style={{
-                        height: '200px',
-                      }}
-                    ></CardMedia>
+											<div
+												dangerouslySetInnerHTML={{
+													__html: this.state.recipe.summary,
+												}}
+											/>
+										</Box>
+									</Grid>
+								</Card>
+								<Link style={{ textDecoration: 'none' }} to="/recipe-results">
+									<Button
+										style={{ color: 'green', marginBottom: '30px' }}
+										variant="outlined"
+									>
+										{' '}
+										BACK TO RESULTS
+									</Button>
+								</Link>
+							</Grid>
 
-                    <CardContent>
-                      <Typography>{options.similarRecipe.name}</Typography>
-                      {options.similarRecipe.nutritional_facts}
-                    </CardContent>
-                  </CardActionArea>
+							<Grid container spacing="3" justify="center" align="center">
+								<Grid item xs={12}>
+									<Typography
+										style={{
+											color: 'black',
+											fontFamily: 'Kalam, cursive',
+											fontWeight: '450',
+										}}
+										variant="h3"
+										component="h2"
+									>
+										Similar Recipes
+									</Typography>
+								</Grid>
 
-                  <Button
-                    style={{
-                      marginBottom: '20px',
-                      background:
-                        'linear-gradient(90deg, rgba(42,204,33,0.9220063025210083) 0%, rgba(46,204,65,1) 35%, rgba(35,157,86,1) 100%)',
-                      fontFamily: 'Kalam, cursive',
-                      fontWeight: '800',
-                    }}
-                    variant='contained'
-                    color='secondary'
-                    type='button'
-                  >
-                    View Recipe
-                  </Button>
-                </Card>
-              )
-            })}
-          </Grid>
-        </Grid>
-      </div>
-    )
-  }
+								{this.state.otherOptions.map((options) => {
+									return (
+										<Card
+											className={classes.card}
+											style={cardStyles}
+											elevation={3}
+										>
+											<CardActionArea>
+												<CardMedia
+													image={`https://spoonacular.com/recipeImages/${options.id}-480x360.${options.imageType}`}
+													style={{
+														height: '250px',
+													}}
+												></CardMedia>
+
+												<CardContent>
+													<Typography variant="h3">{options.title}</Typography>
+													<Typography variant="h3">
+														{options.summary}
+													</Typography>
+													<Typography>
+														{' '}
+														Time to prepare:{options.readyInMinutes} minutes
+													</Typography>
+												</CardContent>
+											</CardActionArea>
+
+											<Button
+												style={{
+													marginBottom: '20px',
+													background:
+														'linear-gradient(90deg, rgba(42,204,33,0.9220063025210083) 0%, rgba(46,204,65,1) 35%, rgba(35,157,86,1) 100%)',
+													fontFamily: 'Kalam, cursive',
+													fontWeight: '800',
+												}}
+												variant="contained"
+												color="secondary"
+												type="button"
+											>
+												View Recipe
+											</Button>
+										</Card>
+									);
+								})}
+							</Grid>
+						</Grid>
+					</div>
+				)}
+			</RecipesContext.Consumer>
+		);
+	}
 }
+export default withStyles(styles)(withRouter(ViewRecipes));
