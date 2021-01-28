@@ -28,8 +28,9 @@ router.get('/saved-recipes', async (req,res) =>{
 
 router.post('/saved-recipe', async (req,res) =>{
     try{
+	console.log(req.body, req.session)
         await recipeSchema.validate(req.body, {abortEarly:false})
-        const recipeId = await knex('recipes').insert({userId: res.session.userId,recipeId: req.body.recipeId})
+        const recipeId = await knex('recipes').insert({userId: req.session.userId,recipeId: req.body.recipeId})
         res.send({check:'working', recipeId})
     }
     catch(error){
