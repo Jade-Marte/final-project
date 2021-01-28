@@ -1,12 +1,5 @@
 //
-import {
-	Container,
-	Typography,
-	Box,
-	Fade,
-	Button,
-	Grid,
-} from '@material-ui/core';
+import { Container, Typography, Box, Fade, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import transitions from '@material-ui/core/styles/transitions';
 import { Link } from 'react-router-dom';
@@ -18,7 +11,6 @@ const useStyles = makeStyles({
 		marginRight: '0px',
 		height: '100vh',
 		padding: '0px !important',
-		// width: '100vw',
 	},
 	text: {
 		fontSize: '100px',
