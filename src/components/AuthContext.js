@@ -5,7 +5,6 @@ const auth = {
   isAuthenticated: false,
   user: {},
   async signin(username, password) {
-    console.log(process.env)
     return fetch(`${process.env.REACT_APP_NODE_URL}/login`, {
       method: 'POST',
       body: JSON.stringify({
@@ -77,7 +76,6 @@ const auth = {
         return res.json()
       })
       .then((body) => {
-        console.log('body user', body)
         if (body.user) {
           auth.user = body.user
           auth.isAuthenticated = true
@@ -167,6 +165,7 @@ export function PrivateRoute({ component: Component, ...rest }) {
           <Component {...props} />
         ) : (
           <Redirect
+            push
             to={{
               pathname: '/login',
               state: { from: props.location },
