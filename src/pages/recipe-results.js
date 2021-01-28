@@ -1,27 +1,20 @@
-import React from "react";
-import Carousel from "react-material-ui-carousel";
-import { Paper, Button, Grid } from "@material-ui/core";
-import RecipeContext from "../components/RecipesContext";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React from 'react'
+import Carousel from 'react-material-ui-carousel'
+import { Paper, Button, Grid } from '@material-ui/core'
+import RecipeContext from '../components/RecipesContext'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class RecipeResults extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       recipes: [],
       setRecipes: (recipes) => {
-        this.setState({ recipes });
+        this.setState({ recipes })
       },
-    };
+    }
   }
-  getRecipe = (id) => {
-    return axios
-      .get(`https://api.spoonacular.com/recipes/${id}/information`)
-      .then((res) => {
-        return res.data;
-      });
-  };
   render() {
     return (
       <RecipeContext.Consumer>
@@ -34,7 +27,7 @@ class RecipeResults extends React.Component {
             ></img>
                </Grid>*/}
             <Grid item xs={12}>
-              <Carousel index="1">
+              <Carousel index='1'>
                 {recipes.map((item, i) => (
                   <Item key={i} item={item} />
                 ))}
@@ -49,26 +42,26 @@ class RecipeResults extends React.Component {
           </Grid>
         )}
       </RecipeContext.Consumer>
-    );
+    )
   }
 }
 function Item(props) {
   const styles = {
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    alignItems: "center",
-  };
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+  }
   function Savedrecipe(id) {
     axios
       .post(
-        process.env.REACT_APP_NODE_URL + "/saved-recipe",
+        process.env.REACT_APP_NODE_URL + '/saved-recipe',
         { recipeId: id },
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res.data);
-      });
+        console.log(res.data)
+      })
   }
   return (
     <Paper style={styles}>
@@ -76,21 +69,25 @@ function Item(props) {
       <img
         src={props.item.image}
         alt={props.item.title}
-        style={{ height: "400px", width: "Auto" }}
+        style={{ height: '400px', width: 'Auto' }}
       ></img>
-      <p>{props.item.summary}</p>
+      <p
+        dangerouslySetInnerHTML={{
+          __html: props.item.summary,
+        }}
+      />
       <Button
         onClick={() => {
-          Savedrecipe(props.item.id);
+          Savedrecipe(props.item.id)
         }}
       >
         save recipe
       </Button>
-      <Button className="CheckButton">
-        {" "}
+      <Button className='CheckButton'>
+        {' '}
         <Link to={`/view-recipe/${props.item.id}`}>Check it out!</Link>
       </Button>
     </Paper>
-  );
+  )
 }
-export default RecipeResults;
+export default RecipeResults
