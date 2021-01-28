@@ -3,7 +3,7 @@
     "port": 4000
   },
   "session": {
-    "secret": "RANDOM_SECRET_HERE"
+    "secret": "foobarbazbuz"
   },
   "cors": {
     "whitelist": [

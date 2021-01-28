@@ -1,0 +1,13 @@
+
+> sqlite3@5.0.1 install C:\Users\Jade Marte\Documents\winter_bootcamp\final_project\node_modules\sqlite3
+> node-pre-gyp install --fallback-to-build
+
+Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.
+  nothing.c
+  win_delay_load_hook.cc
+  nothing.vcxproj -> C:\Users\Jade Marte\Documents\winter_bootcamp\final_project\node_modules\sqlite3\build\Release\\nothing.lib
+  unpack_sqlite_dep
+  'C:\Users\Jade' is not recognized as an internal or external command,
+  operable program or batch file.
+C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\VC\VCTargets\Microsoft.CppCommon.targets(209,5): error MSB6006: "cmd.exe" exited with code 1. [C:\Users\Jade Marte\Documents\winter_bootcamp\final_project\node_modules\sqlite3\build\deps\action_before_build.vcxproj]
+Failed to execute 'C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\node_modules\node-gyp\bin\node-gyp.js build --fallback-to-build --module=C:\Users\Jade Marte\Documents\winter_bootcamp\final_project\node_modules\sqlite3\lib\binding\napi-v6-win32-x64\node_sqlite3.node --module_name=node_sqlite3 --module_path=C:\Users\Jade Marte\Documents\winter_bootcamp\final_project\node_modules\sqlite3\lib\binding\napi-v6-win32-x64 --napi_version=6 --node_abi_napi=napi --napi_build_version=6 --node_napi_label=napi-v6' (1)
