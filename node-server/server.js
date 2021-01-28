@@ -11,13 +11,15 @@ const authRoutes = require('./routes/auth')
 
 app.use(
   cors({
-    // origin: (origin, callback) => {
-    //   if (config.cors.whitelist.includes(origin)) {
-    //     callback(null, true)
-    //   } else {
-    //     callback(new Error('Not allowed by CORS'))
-    //   }
-    // },
+    origin: (origin, callback) => {
+	console.log(origin)
+       if (config.cors.whitelist.includes(origin)) {
+         callback(null, true)
+       } else {
+         callback(new Error('Not allowed by CORS'))
+       }
+    },
+    //origin: '*',
     credentials: true,
   })
 )

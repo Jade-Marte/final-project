@@ -39,9 +39,27 @@ router.post("/saved-recipes", async (req, res) => {
     if (error.name === "ValidationError") {
       const errorRes = formatValidationErrors(error);
       res.status(400).send(errorRes);
-    }
-    console.log("Error on login", error);
-  }
-});
+=======
+// router.post('/saved-recipe', async (req,res) =>{
+//     try{
+// 	console.log(req.body, req.session)
+//         await recipeSchema.validate(req.body, {abortEarly:false})
+//         const recipeId = await knex('recipes').insert({userId: req.session.userId,recipeId: req.body.recipeId})
+//         res.send({check:'working', recipeId})
+//     }
+//     catch(error){
+//         if (error.name === 'ValidationError') {
+//             const errorRes = formatValidationErrors(error)
+//             res.status(400).send(errorRes)
+//           } 
+//         console.log('Error on login', error)
+// >>>>>>> main
+//     }
+//     console.log("Error on login", error);
+//   }
+// });
 
 module.exports = router;
+=======
+// module.exports = router
+
