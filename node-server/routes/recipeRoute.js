@@ -39,7 +39,13 @@ router.post("/saved-recipes", async (req, res) => {
     if (error.name === "ValidationError") {
       const errorRes = formatValidationErrors(error);
       res.status(400).send(errorRes);
+<<<<<<< HEAD
+    }
+  }
+});
 =======
+=======
+>>>>>>> 985f522af1f9886e777dfa955962f111c02d1f39
 // router.post('/saved-recipe', async (req,res) =>{
 //     try{
 // 	console.log(req.body, req.session)
@@ -51,7 +57,11 @@ router.post("/saved-recipes", async (req, res) => {
 //         if (error.name === 'ValidationError') {
 //             const errorRes = formatValidationErrors(error)
 //             res.status(400).send(errorRes)
+<<<<<<< HEAD
+//           }
+=======
 //           } 
+>>>>>>> 985f522af1f9886e777dfa955962f111c02d1f39
 //         console.log('Error on login', error)
 // >>>>>>> main
 //     }
@@ -60,6 +70,10 @@ router.post("/saved-recipes", async (req, res) => {
 // });
 
 module.exports = router;
+<<<<<<< HEAD
+// module.exports = router
+=======
 =======
 // module.exports = router
 
+>>>>>>> 985f522af1f9886e777dfa955962f111c02d1f39
