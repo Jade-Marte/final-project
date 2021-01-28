@@ -11,5 +11,16 @@ knex.schema
   })
   .then(() => {
     console.log('Created database tables')
+    
+  })
+
+  knex.schema.createTable('recipes',(table) =>{
+    table.increments('id')
+    table.integer('userId')
+    table.integer('recipeId')
+
+  })
+  .then(() =>{
+    console.log('Created database tables')
     process.exit(0)
   })
