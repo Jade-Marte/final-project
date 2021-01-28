@@ -9,7 +9,13 @@ import {
   withStyles,
 } from '@material-ui/core'
 import MuiAlert from '@material-ui/lab/Alert'
-import { validateUsername, validatePassword } from '../validators/login'
+import {
+  validateUsername,
+  validatePassword,
+  validatePasswordConfirmation,
+  validateFirstName,
+  validateLastName,
+} from '../validators/register'
 import { authContext as AuthContext } from '../components/AuthContext'
 import { Redirect } from 'react-router-dom'
 
@@ -19,7 +25,7 @@ const styles = {
   },
 }
 
-class LoginPage extends Component {
+class RegisterPage extends Component {
   constructor(props) {
     super(props)
 
@@ -28,7 +34,23 @@ class LoginPage extends Component {
         value: '',
         error: '',
       },
+      email: {
+        value: '',
+        error: '',
+      },
       password: {
+        value: '',
+        error: '',
+      },
+      password_confirmation: {
+        value: '',
+        error: '',
+      },
+      first_name: {
+        value: '',
+        error: '',
+      },
+      last_name: {
         value: '',
         error: '',
       },
@@ -57,6 +79,26 @@ class LoginPage extends Component {
   submitForm = async (event, ctx) => {
     event.preventDefault()
 
+    const firstNameError = validateFirstName(this.state.first_name.value)
+    if (firstNameError) {
+      this.setState({
+        first_name: {
+          ...this.state.first_name,
+          error: firstNameError,
+        },
+      })
+    }
+
+    const lastNameError = validateLastName(this.state.last_name.value)
+    if (lastNameError) {
+      this.setState({
+        last_name: {
+          ...this.state.firlast_namest_name,
+          error: lastNameError,
+        },
+      })
+    }
+
     const usernameError = validateUsername(this.state.username.value)
     if (usernameError) {
       this.setState({
@@ -77,25 +119,28 @@ class LoginPage extends Component {
       })
     }
 
-    if (usernameError || passwordError) return
-
-    const [res, body] = await ctx.signin(
-      this.state.username.value,
-      this.state.password.value
+    const confirmPasswordError = validatePasswordConfirmation(
+      this.state.passwordConfirmation.value
     )
-    // TODO: implement login logic
-    // const res = await fetch('http://localhost:4000/login', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     username: this.state.username.value,
-    //     password: this.state.password.value,
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   credentials: 'include',
-    // })
-    // const body = await res.json()
+    if (confirmPasswordError) {
+      this.setState({
+        password_confirmation: {
+          ...this.state.password_confirmation,
+          error: confirmPasswordError,
+        },
+      })
+    }
+
+    if (
+      firstNameError ||
+      lastNameError ||
+      usernameError ||
+      passwordError ||
+      confirmPasswordError
+    )
+      return
+
+    const [res, body] = await ctx.signup({ ...this.state })
 
     // If there were validation errors, parse, then display them
     if (!res.ok && res.status === 400) {
@@ -121,15 +166,15 @@ class LoginPage extends Component {
       return
     }
 
+    // TODO: redirect to survey page
     this.setState({ redirect: true })
   }
 
   render() {
-    const { classes } = this.props
-
     if (this.state.redirect) {
       return <Redirect to='/survey' />
     }
+    const { classes } = this.props
 
     return (
       <AuthContext.Consumer>
@@ -160,9 +205,39 @@ class LoginPage extends Component {
                 <Grid item md={3} my={5}>
                   <Box mb={2}>
                     <Typography variant='h3' component='h3'>
-                      Login
+                      Register
                     </Typography>
                   </Box>
+                  <Box mb={2}>
+                    <TextField
+                      variant='outlined'
+                      label='First Name'
+                      id='first_name'
+                      name='first_name'
+                      required
+                      fullWidth
+                      value={this.state.first_name.value}
+                      onChange={this.handleInputChange}
+                      error={!!this.state.first_name.error}
+                      helperText={this.state.first_name.error}
+                    />
+                  </Box>
+
+                  <Box mb={2}>
+                    <TextField
+                      variant='outlined'
+                      label='Last Name'
+                      id='last_name'
+                      name='last_name'
+                      required
+                      fullWidth
+                      value={this.state.last_name.value}
+                      onChange={this.handleInputChange}
+                      error={!!this.state.last_name.error}
+                      helperText={this.state.last_name.error}
+                    />
+                  </Box>
+
                   <Box mb={2}>
                     <TextField
                       variant='outlined'
@@ -194,6 +269,22 @@ class LoginPage extends Component {
                     />
                   </Box>
 
+                  <Box mb={2}>
+                    <TextField
+                      variant='outlined'
+                      label='Confirm Password'
+                      id='password_confirmation'
+                      name='password_confirmation'
+                      type='password'
+                      required
+                      fullWidth
+                      value={this.state.password_confirmation.value}
+                      onChange={this.handleInputChange}
+                      error={!!this.state.password_confirmation.error}
+                      helperText={this.state.password_confirmation.error}
+                    />
+                  </Box>
+
                   <Box>
                     <Button
                       variant='contained'
@@ -201,10 +292,6 @@ class LoginPage extends Component {
                       fullWidth
                       type='submit'
                       role='submit'
-                      style={{
-                        backgroundColor: 'rgba(35,157,86,1)',
-                        fontWeight: '600',
-                      }}
                     >
                       Login
                     </Button>
@@ -223,4 +310,4 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />
 }
 
-export default withStyles(styles, { withTheme: true })(LoginPage)
+export default withStyles(styles)(RegisterPage)

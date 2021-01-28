@@ -3,6 +3,7 @@ const express = require('express')
 const session = require('express-session')
 const config = require('./config.json')
 const cors = require('cors')
+const recipe = require('./routes/recipeRoute')
 
 const app = express()
 
@@ -11,12 +12,14 @@ const authRoutes = require('./routes/auth')
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (config.cors.whitelist.includes(origin)) {
-        callback(null, true)
-      } else {
-        callback(new Error('Not allowed by CORS'))
-      }
+	console.log(origin)
+       if (config.cors.whitelist.includes(origin)) {
+         callback(null, true)
+       } else {
+         callback(new Error('Not allowed by CORS'))
+       }
     },
+    //origin: '*',
     credentials: true,
   })
 )
@@ -31,6 +34,7 @@ app.use(
 )
 
 app.use(authRoutes)
+app.use(recipe)
 
 app.get('/', (req, res) => {
   res.send('Recipe app API')

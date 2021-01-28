@@ -24,7 +24,6 @@ const registrationSchema = yup.object().shape({
     }),
   first_name: yup.string().required(),
   last_name: yup.string().required(),
-  email: yup.string().required().email(),
 })
 
 router.post('/login', async (req, res) => {
@@ -79,7 +78,12 @@ router.post('/register', async (req, res) => {
     // we don't share their password
     if (user) delete user.password
 
-    res.status(200).send({ message: 'User created', user })
+    // Log the user in
+    req.session.userId = user.id
+    return res.status(200).send({
+      message: 'User created and logged in',
+      user,
+    })
   } catch (error) {
     console.log(error)
 

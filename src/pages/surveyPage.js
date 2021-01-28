@@ -11,6 +11,7 @@ import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import Recipes from "../components/RecipesContext";
+import { Link, useHistory } from "react-router-dom";
 
 // class userList extends component {}
 //
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Survey() {
+  const History = useHistory();
   const { recipes, setRecipes } = useContext(Recipes);
   const [items, setItems] = useState([
     { img: "/food-pics/bananas-thumb-l.png", title: "Banana", selected: false },
@@ -147,6 +149,9 @@ export default function Survey() {
       .then((res) => {
         setRecipes(res.data);
         console.log(res.data);
+      })
+      .then(() => {
+        History.push("/recipe-results");
       });
   }
 
@@ -297,6 +302,7 @@ export default function Survey() {
             >
               Begin food journey
             </Button>
+            {/* <Link to="/recipe-results">test</Link> */}
           </div>
         </Grid>
       </div>
