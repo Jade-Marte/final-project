@@ -299,6 +299,10 @@ class RegisterPage extends Component {
                       fullWidth
                       type='submit'
                       role='submit'
+                      style={{
+                        backgroundColor: 'rgba(35,157,86,1)',
+                        fontWeight: '600',
+                      }}
                     >
                       Register
                     </Button>
