@@ -10,6 +10,7 @@ import RecipeResultsPage from './pages/recipe-results.js'
 import LoginPage from './pages/LoginPage'
 import ViewRecipe from './pages/ViewRecipe'
 import LandingPage from './pages/LandingPage'
+import RegisterPage from './pages/RegisterPage'
 
 function App() {
   const [recipes, setRecipes] = useState([])
@@ -49,6 +50,14 @@ function App() {
               <NavbarLayout>
                 <Container maxWidth='lg'>
                   <LoginPage />
+                </Container>
+              </NavbarLayout>
+            </Route>
+
+            <Route path='/register'>
+              <NavbarLayout>
+                <Container maxWidth='lg'>
+                  <RegisterPage />
                 </Container>
               </NavbarLayout>
             </Route>
