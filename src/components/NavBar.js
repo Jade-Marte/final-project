@@ -107,7 +107,7 @@ export default function MenuAppBar() {
               <Toolbar>
                 <Typography variant='h6' className={classes.title}>
                   <Link className={classes.btn} to='/survey'>
-                    Recipe App
+                    Zesty Friendgredients
                   </Link>
                 </Typography>
 
@@ -227,7 +227,6 @@ export default function MenuAppBar() {
                       open={open}
                       onClose={handleClose}
                     >
-                      <MenuItem onClick={handleClose}>Sign Up</MenuItem>
                       <MenuItem onClick={handleClose}>Log Out</MenuItem>
                     </Menu>
                   </div>
