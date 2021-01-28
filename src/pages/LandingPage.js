@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 	container: {
 		position: 'relative',
 		marginBottom: '0px',
@@ -27,10 +27,16 @@ const useStyles = makeStyles({
 	title: {
 		fontWeight: '600',
 		background:
-			'-webkit-linear-gradient(90deg,  rgba(42,204,33,1) 55%, rgba(27,111,62,1) 80%, rgba(55,245,77,0.989233193277311) 10%);',
+			'-webkit-linear-gradient(90deg,  rgba(42,204,33,1) 55%, rgba(27,111,62,1) 80%, rgba(55,245,77,0.989233193277311) 100%);',
 
 		'-webkit-background-clip': 'text',
 		'-webkit-text-fill-color': 'transparent',
+		width: 'fullwidth',
+		fontSize: '72px',
+		wordWrap: 'break-word',
+		[theme.breakpoints.down('sm')]: {
+			fontSize: '40px',
+		},
 	},
 	overlay: {
 		backgroundColor: 'rgba(20, 20, 20, 0.7)',
@@ -81,8 +87,11 @@ const useStyles = makeStyles({
 		marginLeft: 'auto',
 		marginRight: 'auto',
 		marginBottom: '30px',
+		[theme.breakpoints.down('sm')]: {
+			fontSize: '20px',
+		},
 	},
-});
+}));
 
 export default function LandingPage(props) {
 	const items = [
@@ -135,10 +144,11 @@ function Item(props) {
 					<Fade in={true} timeout={1000}>
 						<Typography
 							className={`${classes.text} ${classes.title}`}
-							variant="h2"
+							variant="h5"
 							gutterBottom
+							className={classes.title}
 						>
-							{props.title || 'Recipe App'}
+							{props.title || 'Zesty Friendgredients'}
 						</Typography>
 					</Fade>
 					<Fade in={true} timeout={200}>
