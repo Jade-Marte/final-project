@@ -164,8 +164,6 @@ class ViewRecipes extends React.Component {
 												textAlign: 'center',
 											}}
 										>
-											{this.state.recipe.summary}
-
 											<div
 												style={{ padding: '10px 20px 5px 10px' }}
 												dangerouslySetInnerHTML={{
@@ -215,8 +213,8 @@ class ViewRecipes extends React.Component {
 												></CardMedia>
 
 												<CardContent>
-													<Typography>{this.state.other.title}</Typography>
-													{this.state.other.summary}
+													<Typography>{options.title}</Typography>
+													{options.summary}
 												</CardContent>
 											</CardActionArea>
 
