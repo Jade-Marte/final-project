@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <title>Data parsed from emails</title>
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+  </head>
+  <body style="padding:3em;">
+    <h2>Parsed data from Messages</h2>
+    <table style="width:820px">
+    <thead>
+    <tr>
+      <th>OrderId</th>
+      <th>Quantity</th>
+      <th>Product</th>
+      <th>Destination</th>
+      <th>Customer Email</th>
+    </tr>
+    </thead>
+      <tbody>
+    <? for(var m=0;m<records.length;m++){ ?>
+    <tr>
+      <td><?= records[m].OrderId ?></td> 
+      <td><?= records[m].Quantity ?></td>
+      <td><?= records[m].Product ?></td>
+      <td><?= records[m].Destination?></td>
+      <td><?= records[m].CustomerEmail?></td>
+    </tr>
+    <? }?>
+    </tbody>
+    </table>
+    
+  </body>
+</html>
+
