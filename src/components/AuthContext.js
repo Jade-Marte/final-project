@@ -63,7 +63,7 @@ const auth = {
       })
   },
   async signout() {
-    // TODO: send logout request
+    // TODO: send logout request.
     auth.isAuthenticated = false
     auth.user = null
   },
